@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Bookmark App</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
   <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
@@ -17,52 +18,60 @@
 
     <!-- template HTML for add-bookmark form -->
     <form id="add-bookmark-form">
-      <div class="input-group">
-        <label for="bookmark-new-title">Title:</label>
-        <input type="text" name="new-title" id="bookmark-new-title">
+      <div class="top-row">
+        <div class="input-group">
+          <label for="bookmark-new-title">Title:</label>
+          <input type="text" name="new-title" id="bookmark-new-title">
+        </div>
+        <div class="input-group">
+          <label for="bookmark-new-url">URL:</label>
+          <input type="url" name="new-url" id="bookmark-new-url">
+        </div>
       </div>
-      <div class="input-group">
-        <label for="bookmark-new-url">URL:</label>
-        <input type="url" name="new-url" id="bookmark-new-url">
-      </div>
-      <div class="input-group">
+      <div class="input-group description">
         <label for="bookmark-new-description">Description:</label>
         <textarea name="new-description" id="bookmark-new-description" cols="30" rows="10"></textarea>
       </div>
-      <div class="input-group">
-        <label for="bookmark-new-rating">Rating (1-5):</label>
-        <input type="number" name="new-rating" id="bookmark-new-rating" min="1" max="5">
+      <div class="right-side">
+        <div class="input-group">
+          <label for="bookmark-new-rating">Rating (1-5):</label>
+          <input type="number" name="new-rating" id="bookmark-new-rating" min="1" max="5">
+        </div>
+        <button type="submit">Submit</button>
       </div>
-      <button type="submit">Submit</button>
     </form>
 
-    <ul>
+    <ul class="bookmark-list">
       <!-- template HTML for non-expanded bookmark -->
-      <li class="bookmark">
-        <h2 class="bookmark-title">Bookmark Title Here</h2> <p class="bookmark-rating">Rating Goes Here</p>
+      <li>
+        <div class="bookmark"><h2 class="bookmark-title">Bookmark Title Here</h2> <p class="bookmark-rating">Rating Goes Here</p></div>
         <div class="bookmark-controls">
-          <button class="bookmark edit"><span class="button-label">Edit</span></button>
-          <button class="bookmark remove"><span class="button-label">Remove</span></button>
+          <button class="bookmark-edit"><span class="button-label">Edit</span></button>
+          <button class="bookmark-remove"><span class="button-label">Remove</span></button>
         </div>
       </li>
 
       <!-- template HTML for expanded bookmark -->
-      <li class="bookmark expanded">
-        <h2 class="bookmark-title">Bookmark Title Here</h2> <p class="bookmark-rating">Rating Goes Here</p>
-        <p class="bookmark-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tellus neque, congue quis nunc in, vehicula aliquet nisi. Nullam malesuada metus at convallis maximus. Cras quis sapien efficitur, convallis justo at, pretium eros. Nulla mi nibh, pellentesque at porttitor eget, laoreet at neque. Curabitur ac turpis et nibh laoreet viverra at eget mi. Ut auctor varius ligula sit amet faucibus. Nulla ac pharetra augue, quis varius risus. Curabitur nibh est, scelerisque sed condimentum ac, mollis eu diam. Curabitur bibendum pellentesque nisl at sagittis.</p>
-        <div class="bookmark-controls">
-          <button class="bookmark edit"><span class="button-label">Edit</span></button>
-          <button class="bookmark remove"><span class="button-label">Remove</span></button>
+      <li class="expanded">
+        <div class="bookmark">
+          <h2 class="bookmark-title">Bookmark Title Here</h2> <p class="bookmark-rating">Rating Goes Here</p>
+          <p class="bookmark-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tellus neque, congue quis nunc in, vehicula aliquet nisi. Nullam malesuada metus at convallis maximus. Cras quis sapien efficitur, convallis justo at, pretium eros. Nulla mi nibh, pellentesque at porttitor eget, laoreet at neque. Curabitur ac turpis et nibh laoreet viverra at eget mi. Ut auctor varius ligula sit amet faucibus. Nulla ac pharetra augue, quis varius risus. Curabitur nibh est, scelerisque sed condimentum ac, mollis eu diam. Curabitur bibendum pellentesque nisl at sagittis.</p>
         </div>
-        <a class="bookmark-url" href="#">Visit Site</a>
+        <div class="bookmark-controls">
+          <button class="bookmark-edit"><span class="button-label">Edit</span></button>
+          <button class="bookmark-remove"><span class="button-label">Remove</span></button>
+          <a class="bookmark-url" href="#">Visit Site</a>
+        </div>
       </li>
 
       <!-- template HTML for editing bookmark form -->
-      <li class="bookmark editing">
+      <li class="editing">
         <form id="edit-bookmark-form">
-          <input type="text" name="edit-title" id="bookmark-edit-title" value="Current Title Here">
-          <input type="number" name="edit-rating" id="bookmark-edit-rating" value="5">
-          <button type="submit">Save</button>
+          <div class="bookmark">
+            <input type="text" name="edit-title" id="bookmark-edit-title" value="Current Title Here">
+            <input type="number" name="edit-rating" id="bookmark-edit-rating" value="5">
+          </div>
+          <div class="bookmark-controls"><button type="submit">Save</button></div>
           <textarea name="edit-description" id="bookmark-edit-description"></textarea>
           <input type="url" name="edit-url" id="bookmark-edit-url" value="www.currentUrlHere.com">
         </form>
