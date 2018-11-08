@@ -3,8 +3,17 @@
 }
 
 main {
-  width: 75%;
+  width: 80%;
   margin: auto;
+}
+
+input, textarea, button {
+  border: 1px solid grey;
+  border-radius: 2px;
+}
+
+button {
+  background-color: lightgray;
 }
 
 .input-group {
@@ -39,8 +48,6 @@ main {
 .right-side {
   display: inline-block;
   width: 19%;
-  position: relative;
-  top: -1em;
 }
 
 .right-side .input-group {
@@ -69,28 +76,35 @@ main {
 
 .bookmark {
   display: inline-block;
-  width: 80%;
+  width: 65%;
   padding: 0 10px;
 
 }
 
 .bookmark > h2 {
+  font-size: 15pt;
   display: inline;
 }
 
 .bookmark > p {
   display: inline;
+  float: right;
 }
 
 .bookmark-controls {
   display: inline-block;
-  width: 19%;
+  width: 30%;
   margin: 0;
+  float: right;
 }
 
 .bookmark-controls > button {
-  width: 48%;
+  width: 49%;
   margin: auto;
+}
+
+.bookmark-controls > a {
+  display: block;
 }
 
 #bookmark-edit-title {
