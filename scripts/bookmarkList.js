@@ -75,13 +75,24 @@ const bookmarkList = (function() {
     return $(bookmark).closest('.bookmark').data('bookmark-id');
   }
 
-  // POSSIBLE STRETCH GOAL: do not call this when edit or remove buttons are clicked
+  function visitPage(id) {
+    window.open(store.findById(id).url);
+  }
+
   function handleBookmarkExpanded() {
     $('.bookmark-list').on('click', '.bookmark', event => {
       const id = getBookmarkIdFromElement(event.target);
       store.toggleBookmarkIsExpanded(id);
       // console.log(store.findById(id).isExpanded);
       render();
+    });
+  }
+
+  function handleURLClicked() {
+    $('.bookmark-list').on('click', '.bookmark-url', event => {
+      event.stopPropagation();
+      // console.log('event fired');
+      visitPage(getBookmarkIdFromElement(event.currentTarget));
     });
   }
 
@@ -123,6 +134,7 @@ const bookmarkList = (function() {
   function handleDeleteBookmarkClicked() {
     $('.bookmark-list').on('click', '.bookmark-remove', event => {
       // console.log('event fired');
+      event.stopPropagation();
       const id = getBookmarkIdFromElement(event.currentTarget);
       api.deleteBookmark(id, () => {
         store.findAndDelete(id);
@@ -143,6 +155,7 @@ const bookmarkList = (function() {
   
   function bindEventListeners() {
     handleBookmarkExpanded();
+    handleURLClicked();
     handleNewBookmarkClicked();
     handleNewBookmarkSubmit();
     handleNewBookmarkCancel();
