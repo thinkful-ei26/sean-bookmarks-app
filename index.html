@@ -12,9 +12,10 @@
   <main>
     <h1>My Bookmarks</h1>
     <form id="bookmark-form">
-      <button>New Bookmark</button>
+      <button class="new-bookmark" role="button">New Bookmark</button>
       <input type="text" name="rating-filter" id="bookmark-rating-filter" placeholder="minimum rating">
     </form>
+    <form id="add-bookmark-form"></form>
 
     <!-- template HTML for add-bookmark form -->
     <!-- <form id="add-bookmark-form">
@@ -42,33 +43,6 @@
     </form> -->
 
     <ul class="bookmark-list">
-      <!-- template HTML for non-expanded bookmark -->
-      <!-- <li>
-        <div class="bookmark-header">
-          <h2 class="bookmark-title">Bookmark Title Here</h2>
-          <ul>
-            <li><button class="bookmark-edit"><span class="button-label">Edit</span></button></li>
-            <li><button class="bookmark-remove"><span class="button-label">Remove</span></button></li>
-          </ul>
-        </div>
-        <div class="bookmark">
-          <p class="bookmark-rating">Rating Goes Here</p>
-        </div>
-      </li> -->
-
-      <!-- template HTML for expanded bookmark -->
-      <!-- <li class="expanded">
-        <div class="bookmark">
-          <h2 class="bookmark-title">Bookmark Title Here</h2> <p class="bookmark-rating">Rating Goes Here</p>
-          <p class="bookmark-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tellus neque, congue quis nunc in, vehicula aliquet nisi. Nullam malesuada metus at convallis maximus. Cras quis sapien efficitur, convallis justo at, pretium eros. Nulla mi nibh, pellentesque at porttitor eget, laoreet at neque. Curabitur ac turpis et nibh laoreet viverra at eget mi. Ut auctor varius ligula sit amet faucibus. Nulla ac pharetra augue, quis varius risus. Curabitur nibh est, scelerisque sed condimentum ac, mollis eu diam. Curabitur bibendum pellentesque nisl at sagittis.</p>
-        </div>
-        <div class="bookmark-controls">
-          <button class="bookmark-edit"><span class="button-label">Edit</span></button>
-          <button class="bookmark-remove"><span class="button-label">Remove</span></button>
-          <a class="bookmark-url" href="#">Visit Site</a>
-        </div>
-      </li> -->
-
       <!-- template HTML for editing bookmark form -->
       <!-- <li class="editing">
         <form id="edit-bookmark-form">
@@ -81,7 +55,6 @@
           <input type="url" name="edit-url" id="bookmark-edit-url" value="www.currentUrlHere.com">
         </form>
       </li> -->
-
     </ul>
   </main>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

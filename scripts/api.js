@@ -9,7 +9,16 @@ const api = (function() {
     $.getJSON(`${BASE_URL}/bookmarks`, callback);
   }
 
-  function createBookmark() {}
+  function createBookmark(data, callbackSuccess, callbackError) {
+    $.ajax({
+      url: `${BASE_URL}/bookmarks`,
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success: callbackSuccess,
+      error: callbackError
+    });
+  }
 
   function updateBookmark() {}
 

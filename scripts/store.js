@@ -15,6 +15,10 @@ const store = (function() {
     bookmark.isExpanded = !bookmark.isExpanded;
   }
 
+  function setCreate(val) {
+    store.create = val;
+  }
+
   return {
     bookmarks: [],
     minimumRating: 0,
@@ -22,6 +26,7 @@ const store = (function() {
 
     addBookmark,
     findById,
-    toggleBookmarkIsExpanded
+    toggleBookmarkIsExpanded,
+    setCreate
   };
 }());
