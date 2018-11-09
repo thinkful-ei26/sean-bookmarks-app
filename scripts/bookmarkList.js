@@ -30,21 +30,43 @@ const bookmarkList = (function() {
   function genterateBookmarkElement(bookmark) {
     const expanded = bookmark.isExpanded ? `
     <p class="bookmark-description">${bookmark.desc}<p>
-    <button class="bookmark-url"><span class="button-label">Go To URL</span></button>
+    <button class="bookmark-url">Go To URL</button>
     ` : '';
-
+    const editing = bookmark.isEditing ? `
+    <form id="edit-bookmark-form">
+      <div class="input-group">
+        <label for="bookmark-edit-title">Title:</label>
+        <input type="text" name="edit-title" id="bookmark-edit-title" value="${bookmark.title}" readonly required>
+      </div>
+      <div class="input-group">
+        <label for="bookmark-edit-url">URL:</label>
+        <input type="url" name="edit-url" id="bookmark-edit-url" value="${bookmark.url}" required>
+      </div>
+      <div class="input-group">
+        <label for="bookmark-edit-desc">Description:</label>
+        <input type="text" name="edit-desc" id="bookmark-edit-desc" value="${bookmark.desc}">
+      </div>
+      <div class="input-group">
+        <label for="bookmark-edit-rating">Rating:</label>
+        <input type="number" name="edit-rating" id="bookmark-edit-rating" value="${bookmark.rating}">
+      </div>
+      <button id="bookmark-edit-submit" type="submit">Submit</button>
+    </form>
+    ` : '';
+    // NOTE: these values CAN be edited in chrome, but only if they are tabbed to (I haven't tested how other browsers
+    // handle a default value)
 
     return `
       <li class="bookmark" data-bookmark-id="${bookmark.id}">
         <div class="bookmark-header">
           <h2 class="bookmark-title">${bookmark.title}</h2>
           <ul>
-            <li><button class="bookmark-edit"><span class="button-label">Edit</span></button></li>
-            <li><button class="bookmark-remove"><span class="button-label">Remove</span></button></li>
+            <li><button class="bookmark-edit">Edit</button></li>
+            <li><button class="bookmark-remove">Remove</button></li>
           </ul>
         </div>
         <div class="bookmark-content">
-          <p class="bookmark-rating">${bookmark.rating} / 5</p>${expanded}
+          <p class="bookmark-rating">${bookmark.rating} / 5</p>${expanded}${editing}
         </div>
       </li>
     `;
@@ -118,7 +140,7 @@ const bookmarkList = (function() {
         store.addBookmark(newBookmark);
         store.setCreate(false);
         render();
-      }, (error) => {window.alert(error.responseJSON.message);});
+      }, (error) => window.alert(error.responseJSON.message));
     });
   }
 
@@ -152,6 +174,37 @@ const bookmarkList = (function() {
       render();
     });
   }
+
+  function handleEditBookmarkClicked() {
+    $('.bookmark-list').on('click', '.bookmark-edit', event => {
+      event.stopPropagation();
+      // console.log('event fired');
+      const id = getBookmarkIdFromElement(event.currentTarget);
+      store.toggleBookmarkIsEditing(id);
+      render();
+    });
+  }
+
+  function handleEditBookmarkSubmit() {
+    // have to use click on the button instead of submint on the form because I'm getting an error: Form submission
+    // canceled because the form is not connected
+    $('.bookmark-list').on('click', '#bookmark-edit-submit', event => {
+      event.preventDefault();
+      event.stopPropagation();
+      // console.log('event fired');
+      const id = getBookmarkIdFromElement(event.currentTarget);
+      const editBookmarkData = {};
+      editBookmarkData.title = $('#bookmark-edit-title').val();
+      editBookmarkData.url = $('#bookmark-edit-url').val();
+      if ($('#bookmark-edit-desc').val()) editBookmarkData.desc = $('#bookmark-edit-desc').val();
+      if ($('#bookmark-edit-rating').val()) editBookmarkData.rating = $('#bookmark-edit-rating').val();
+      api.updateBookmark(id, editBookmarkData, () => {
+        store.findAndUpdate(id, editBookmarkData);
+        store.toggleBookmarkIsEditing(id);
+        render();
+      }, (error) => window.alert(error.responseJSON.message));
+    });
+  }
   
   function bindEventListeners() {
     handleBookmarkExpanded();
@@ -161,6 +214,8 @@ const bookmarkList = (function() {
     handleNewBookmarkCancel();
     handleDeleteBookmarkClicked();
     handleMinimumRatingChanged();
+    handleEditBookmarkClicked();
+    handleEditBookmarkSubmit();
   }
 
   return {
