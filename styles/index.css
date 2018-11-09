@@ -28,3 +28,9 @@ ul {
   position: absolute;
   /* left: 1px; */
 }
+
+.bookmark-content {
+  text-align: center;
+  /* margin-left: auto;
+  margin-right: auto; */
+}

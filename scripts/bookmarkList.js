@@ -5,8 +5,14 @@
 // eslint-disable-next-line no-unused-vars
 const bookmarkList = (function() {
   function genterateBookmarkElement(bookmark) {
+    const expanded = bookmark.isExpanded ? `
+    <p class="bookmark-description">${bookmark.desc}<p>
+    <button class="bookmark-url"><span class="button-label">Go To URL</span></button>
+    ` : '';
+
+
     return `
-      <li data-bookmark-id="${bookmark.id}">
+      <li class="bookmark" data-bookmark-id="${bookmark.id}">
         <div class="bookmark-header">
           <h2 class="bookmark-title">${bookmark.title}</h2>
           <ul>
@@ -14,8 +20,8 @@ const bookmarkList = (function() {
             <li><button class="bookmark-remove"><span class="button-label">Remove</span></button></li>
           </ul>
         </div>
-        <div class="bookmark">
-          <p class="bookmark-rating">${bookmark.rating} / 5</p>
+        <div class="bookmark-content">
+          <p class="bookmark-rating">${bookmark.rating} / 5</p>${expanded}
         </div>
       </li>
     `;
@@ -32,8 +38,23 @@ const bookmarkList = (function() {
     const bookmarksString = generateBookmarksString(bookmarks);
     $('.bookmark-list').html(bookmarksString);
   }
+
+  function getBookmarkIdFromElement(bookmark) {
+    return $(bookmark).closest('.bookmark').data('bookmark-id');
+  }
+
+  function handleBookmarkExpanded() {
+    $('.bookmark-list').on('click', '.bookmark', event => {
+      const id = getBookmarkIdFromElement(event.target);
+      store.toggleBookmarkIsExpanded(id);
+      // console.log(store.findById(id).isExpanded);
+      render();
+    });
+  }
   
-  function bindEventListeners() {}
+  function bindEventListeners() {
+    handleBookmarkExpanded();
+  }
 
   return {
     render,
