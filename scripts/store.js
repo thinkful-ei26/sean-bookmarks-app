@@ -20,7 +20,11 @@ const store = (function() {
   }
 
   function setCreate(val) {
-    store.create = val;
+    this.create = val;
+  }
+
+  function setMinimumRating(val) {
+    this.minimumRating = val;
   }
 
   return {
@@ -32,6 +36,7 @@ const store = (function() {
     findById,
     findAndDelete,
     toggleBookmarkIsExpanded,
-    setCreate
+    setCreate,
+    setMinimumRating
   };
 }());

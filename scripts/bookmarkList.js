@@ -65,6 +65,7 @@ const bookmarkList = (function() {
     }
 
     let bookmarks = [...store.bookmarks];
+    if (store.minimumRating) bookmarks = bookmarks.filter(bookmark => bookmark.rating >= store.minimumRating);
 
     const bookmarksString = generateBookmarksString(bookmarks);
     $('.bookmark-list').html(bookmarksString);
@@ -129,6 +130,16 @@ const bookmarkList = (function() {
       }, (error) => {window.alert(error.responseJSON.message);});
     });
   }
+
+  function handleMinimumRatingChanged() {
+    $('#bookmark-rating-filter').on('input', event => {
+      // console.log('event fired');
+      const val = $(event.currentTarget)[0].options.selectedIndex + 1;
+      // console.log(val);
+      store.setMinimumRating(val);
+      render();
+    });
+  }
   
   function bindEventListeners() {
     handleBookmarkExpanded();
@@ -136,6 +147,7 @@ const bookmarkList = (function() {
     handleNewBookmarkSubmit();
     handleNewBookmarkCancel();
     handleDeleteBookmarkClicked();
+    handleMinimumRatingChanged();
   }
 
   return {
