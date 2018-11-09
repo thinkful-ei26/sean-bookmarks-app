@@ -74,6 +74,7 @@ const bookmarkList = (function() {
     return $(bookmark).closest('.bookmark').data('bookmark-id');
   }
 
+  // POSSIBLE STRETCH GOAL: do not call this when edit or remove buttons are clicked
   function handleBookmarkExpanded() {
     $('.bookmark-list').on('click', '.bookmark', event => {
       const id = getBookmarkIdFromElement(event.target);
@@ -95,7 +96,7 @@ const bookmarkList = (function() {
   function handleNewBookmarkSubmit() {
     $('#add-bookmark-form').on('submit', event => {
       event.preventDefault();
-      console.log('event fired');
+      // console.log('event fired');
       const newBookmarkData = {};
       newBookmarkData.title = $('#bookmark-new-title').val();
       newBookmarkData.url = $('#bookmark-new-url').val();
@@ -117,12 +118,24 @@ const bookmarkList = (function() {
       render();
     });
   }
+
+  function handleDeleteBookmarkClicked() {
+    $('.bookmark-list').on('click', '.bookmark-remove', event => {
+      // console.log('event fired');
+      const id = getBookmarkIdFromElement(event.currentTarget);
+      api.deleteBookmark(id, () => {
+        store.findAndDelete(id);
+        render();
+      }, (error) => {window.alert(error.responseJSON.message);});
+    });
+  }
   
   function bindEventListeners() {
     handleBookmarkExpanded();
     handleNewBookmarkClicked();
     handleNewBookmarkSubmit();
     handleNewBookmarkCancel();
+    handleDeleteBookmarkClicked();
   }
 
   return {

@@ -22,7 +22,15 @@ const api = (function() {
 
   function updateBookmark() {}
 
-  function deleteBookmark() {}
+  function deleteBookmark(id, callbackSuccess, callbackError) {
+    $.ajax({
+      url: `${BASE_URL}/bookmarks/${id}`,
+      method: 'DELETE',
+      contentType: 'application/json',
+      success: callbackSuccess,
+      error: callbackError
+    });
+  }
 
   return {getBookmarks, createBookmark, updateBookmark, deleteBookmark};
 }());

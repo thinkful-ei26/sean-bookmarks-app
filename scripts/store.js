@@ -10,6 +10,10 @@ const store = (function() {
     return this.bookmarks.find(bookmark => bookmark.id === id);
   }
 
+  function findAndDelete(id) {
+    this.bookmarks = this.bookmarks.filter(bookmark => bookmark.id !== id);
+  }
+
   function toggleBookmarkIsExpanded(id) {
     const bookmark = this.findById(id);
     bookmark.isExpanded = !bookmark.isExpanded;
@@ -26,6 +30,7 @@ const store = (function() {
 
     addBookmark,
     findById,
+    findAndDelete,
     toggleBookmarkIsExpanded,
     setCreate
   };
