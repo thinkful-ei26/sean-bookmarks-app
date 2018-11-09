@@ -7,123 +7,24 @@ main {
   margin: auto;
 }
 
-input, textarea, button {
-  border: 1px solid grey;
-  border-radius: 2px;
-}
-
-button {
-  background-color: lightgray;
-}
-
-.input-group {
-  display: inline-block;
-}
-
-.input-group label {
-  display: block;
-}
-
-.top-row {
-  width: 100%;
-}
-
-.top-row > .input-group {
-  width: 49%;
-}
-
-.top-row input {
-  width: 100%;
-}
-
-.description {
-  width: 80%;
-}
-
-#bookmark-new-description {
-  width: 100%;
-  height: 3em;
-}
-
-.right-side {
-  display: inline-block;
-  width: 19%;
-}
-
-.right-side .input-group {
-  display: block;
-}
-
-.right-side .input-group label {
-  display: inline;
-}
-
-.right-side button {
-  width: 100%;
-}
-
-.bookmark-list {
-  list-style: none;
+ul {
+  list-style-type: none;
   padding-left: 0;
 }
 
 .bookmark-list > li {
-  width: 100%;
-  margin-bottom: 10px;
-  border: solid black 1px;
-  padding: 0px;
+  margin-bottom: 20px;
+  border: 1px solid black;
+  padding: 20px;
 }
 
-.bookmark {
-  display: inline-block;
-  width: 65%;
-  padding: 0 10px;
-
+.bookmark-header {
+  border-bottom: 1px solid grey;
+  text-align: right;
 }
 
-.bookmark > h2 {
-  font-size: 15pt;
-  display: inline;
-}
-
-.bookmark > p {
-  display: inline;
-  float: right;
-}
-
-.bookmark-controls {
-  display: inline-block;
-  width: 30%;
-  margin: 0;
-  float: right;
-}
-
-.bookmark-controls > button {
-  width: 49%;
-  margin: auto;
-}
-
-.bookmark-controls > a {
-  display: block;
-}
-
-#bookmark-edit-title {
-  width: 90%;
-}
-
-#bookmark-edit-rating {
-  width: 9%;
-}
-
-#edit-bookmark-form  button {
-  width: 100%;
-}
-
-#edit-bookmark-form > textarea {
-  display: block;
-  width: 100%;
-}
-
-#bookmark-edit-url {
-  width: 100%;
+.bookmark-header > h2 {
+  font-size: 16pt;
+  position: absolute;
+  /* left: 1px; */
 }
